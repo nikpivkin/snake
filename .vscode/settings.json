@@ -1,0 +1,12 @@
+{
+    "gopls": {
+      "build.env": {
+        "GOOS": "js",
+        "GOARCH": "wasm"
+      }
+    },
+    "yaml.schemas": {
+      "file:///Users/tososomaru/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+      "https://json.schemastore.org/github-workflow.json": "file:///Users/nikita/projects/homework/term-game/.github/workflows/deploy.yaml"
+    }
+  }

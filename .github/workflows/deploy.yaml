@@ -1,0 +1,20 @@
+name: Deploy Web
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  deploy-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+      - run: make build-web
+      - run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git checkout -b web
+          git add -f static
+          git add .
+          git commit -m "Deploy Web"
+          git push origin web

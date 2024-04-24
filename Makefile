@@ -8,7 +8,7 @@ build-js:
 
 
 build-web:
-	test -f .$(STATIC_DIR)/wasm_exec.js || cp $$(go env GOROOT)/misc/wasm/wasm_exec.js $(STATIC_DIR)/wasm_exec.js
+	test -f $(STATIC_DIR)/wasm_exec.js || cp $$(go env GOROOT)/misc/wasm/wasm_exec.js $(STATIC_DIR)/wasm_exec.js
 	make build-js
 
 serve-static: build-web

@@ -3,18 +3,27 @@ name: Deploy Web
 on:
   workflow_dispatch: 
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   deploy-web:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
       - run: make build-web
-      - run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git checkout -b web
-          git add -f static
-          git add .
-          git commit -m "Deploy Web"
-          git push origin web
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./static
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
